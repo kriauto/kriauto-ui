@@ -1,3 +1,5 @@
+import { AuthenticationService } from '../service/authentication.service';
+import { Profile} from '../model/profile';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,13 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  private bodyText: string;
+  profile: Profile = new Profile();
 
   connected = false;
 
-  constructor() { }
+  constructor(private authenticationService : AuthenticationService) { }
 
   ngOnInit() {
+  }
+
+  login() {
+    this.authenticationService.login(this.profile)
+      .subscribe(
+        (data) => {alert("ok"),console.log(data)},
+        (error) => {alert("ko"),console.log(error)});
+    //this.profile = new Profile();
   }
 
 }
