@@ -1,14 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
 
 import { AppComponent } from './app.component';
+import { AppRouting } from './app.routing';
+
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { LastpositionComponent } from './lastposition/lastposition.component';
+import { HistoricalComponent } from './historical/historical.component';
+import { VirtualzoneComponent } from './virtualzone/virtualzone.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    WelcomeComponent,
+    LastpositionComponent,
+    HistoricalComponent,
+    VirtualzoneComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    AppRouting
   ],
   providers: [],
   bootstrap: [AppComponent]
