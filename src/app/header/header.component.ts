@@ -1,5 +1,6 @@
 import { AuthenticationService } from '../service/authentication.service';
-import { Profile} from '../model/profile';
+import { CurrentUser} from '../model/currentUser';
+import { Authentication } from '../model/authentication';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  profile: Profile = new Profile();
+  private authentication : Authentication = new Authentication();
+  private currentuser : CurrentUser;
 
   connected = false;
 
@@ -19,11 +21,20 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
-    this.authenticationService.login(this.profile)
+    this.authenticationService.login(this.authentication)
       .subscribe(
-        (data) => {alert("ok"),console.log(data)},
-        (error) => {alert("ko"),console.log(error)});
-    //this.profile = new Profile();
-  }
-
+        (data : CurrentUser)=>
+                  {
+                    localStorage.setItem("user",this.authentication.login);
+                    localStorage.setItem("token",data['authToken']);
+                    alert("ok "+ data['authToken']);
+                    console.log(data['authToken']);
+                  },
+        error =>
+                  {
+                    alert("ok "+ error['error']['message']);
+                    console.log(error['error']['message']);
+                    console.log(error['message']);
+                  }
+      )};
 }

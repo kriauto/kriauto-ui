@@ -13,6 +13,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LastpositionComponent } from './lastposition/lastposition.component';
 import { HistoricalComponent } from './historical/historical.component';
 import { VirtualzoneComponent } from './virtualzone/virtualzone.component';
+import {AuthenticationService} from "./service/authentication.service";
 
 
 
@@ -32,7 +33,7 @@ import { VirtualzoneComponent } from './virtualzone/virtualzone.component';
     HttpClientModule,
     AppRouting
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
