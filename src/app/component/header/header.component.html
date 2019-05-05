@@ -125,6 +125,7 @@
         </button>
       </div>
       <div class="modal-body">
+        <div *ngIf="message" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">{{message.text}}</div>
         <form>
           <div class="form-group">
             <label for="login">Identifiant</label>

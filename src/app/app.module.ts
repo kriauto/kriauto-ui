@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { LastpositionComponent } from './lastposition/lastposition.component';
-import { HistoricalComponent } from './historical/historical.component';
-import { VirtualzoneComponent } from './virtualzone/virtualzone.component';
+import { HeaderComponent } from './component/header/header.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
+import { LastpositionComponent } from './component/lastposition/lastposition.component';
+import { HistoricalComponent } from './component/historical/historical.component';
+import { VirtualzoneComponent } from './component/virtualzone/virtualzone.component';
 import {AuthenticationService} from "./service/authentication.service";
+import {TokenInterceptor} from "./interceptor/tokeninterceptor";
 
 
 
@@ -33,7 +34,13 @@ import {AuthenticationService} from "./service/authentication.service";
     HttpClientModule,
     AppRouting
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService,
+              {
+               provide: HTTP_INTERCEPTORS,
+               useClass: TokenInterceptor,
+               multi: true
+              }
+              ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
