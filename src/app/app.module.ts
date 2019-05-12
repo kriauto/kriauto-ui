@@ -13,8 +13,9 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
 import { LastpositionComponent } from './component/lastposition/lastposition.component';
 import { HistoricalComponent } from './component/historical/historical.component';
 import { VirtualzoneComponent } from './component/virtualzone/virtualzone.component';
-import {AuthenticationService} from "./service/authentication.service";
-import {TokenInterceptor} from "./interceptor/tokeninterceptor";
+import { AuthenticationService } from "./service/authentication.service";
+import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { TokenInterceptor } from "./interceptor/tokeninterceptor";
 
 
 
@@ -32,14 +33,15 @@ import {TokenInterceptor} from "./interceptor/tokeninterceptor";
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRouting
+    AppRouting,
+    NgbModule
   ],
   providers: [AuthenticationService,
               {
                provide: HTTP_INTERCEPTORS,
                useClass: TokenInterceptor,
                multi: true
-              }
+              },
               ],
   bootstrap: [AppComponent]
 })

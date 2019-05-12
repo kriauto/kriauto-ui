@@ -2,7 +2,8 @@ import { AuthenticationService } from '../../service/authentication.service';
 import { Currentuser} from '../../model/currentuser';
 import { Authentication } from '../../model/authentication';
 import { Component, OnInit } from '@angular/core';
-import {Message} from "../../model/message";
+import { Message } from "../../model/message";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {Router, RouterStateSnapshot} from "@angular/router";
 
 @Component({
@@ -10,6 +11,7 @@ import {Router, RouterStateSnapshot} from "@angular/router";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent implements OnInit {
 
   private authentication : Authentication = new Authentication();
@@ -17,7 +19,7 @@ export class HeaderComponent implements OnInit {
   private connected : Boolean;
   private message: Message;
 
-  constructor(private authenticationservice : AuthenticationService) { }
+  constructor(private authenticationservice : AuthenticationService,private modalService: NgbModal) { }
 
   ngOnInit() {
     this.connected = false;
@@ -43,4 +45,11 @@ export class HeaderComponent implements OnInit {
                     this.message = new Message(text,'error','A2');
                   }
       )};
+
+  open(content) {
+    this.authentication = new Authentication();
+    this.message = null;
+    this.modalService.open(content)
+  }
+
 }
